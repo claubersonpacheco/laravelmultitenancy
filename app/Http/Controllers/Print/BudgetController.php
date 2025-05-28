@@ -8,7 +8,7 @@ use App\Models\Budget;
 
 
 use App\Models\BudgetEmailSend;
-use App\Models\Tenant;
+use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
 use Filament\Notifications\Notification;
@@ -39,7 +39,7 @@ class BudgetController extends Controller
 
         $storagePath = storage_path('app/reports/' . $pdfName);
 
-        $setting = Tenant::first();
+        $setting = Setting::first();
 
         $template = view('print.budget.items-budget', compact('budget', 'setting'))->render();
 
@@ -105,7 +105,7 @@ class BudgetController extends Controller
                 $query->orderBy('sort_order', 'asc');
             }])
             ->first();
-        $setting = Tenant::first();
+        $setting = Setting::first();
 
 
         return view('print.budget.items-budget', compact('budget', 'setting'))->render();
@@ -131,7 +131,7 @@ class BudgetController extends Controller
             $pdfName = Date('dmYhHis') . $budget->code . '.pdf';
             $storagePath = storage_path('app/reports/' . $pdfName);
 
-            $setting = Tenant::first();
+            $setting = Setting::first();
 
             $template = view('print.budget.items-budget', compact('budget', 'setting'))->render();
 
